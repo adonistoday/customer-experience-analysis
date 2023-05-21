@@ -9,8 +9,13 @@ import ReactApexChart from "react-apexcharts";
 import RecordItem from "../components/RecordItem";
 import ListItem from "../components/ListItem";
 import TimeLine from "../components/TimeLine";
+import AudioPlayer from "../components/audioplayer";
+import tracks from "../tracks";
 import { useEffect, useState } from "react";
 import HeaderBar from "../components/HeaderBar";
+import LineChart from "../components/linechart";
+import Accordion from "../components/Accordion";
+import mockData from "../tracks";
 const { Header, Sider, Content } = Layout;
 const gridStyle = {
   width: "100%",
@@ -20,6 +25,9 @@ export default function MainPage() {
   const [data, setData] = useState([]);
   const [dataItem, setDataItem] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [audiofile, setAudiofile] = useState(null);
+
+  const [track, setTrack] = useState(mockData[0]);
 
   const chartOptions = {
     // Configuration options
@@ -36,6 +44,9 @@ export default function MainPage() {
 
   const handleClick = (item) => {
     setDataItem(item);
+    setAudiofile(item.fileName);
+    // TODO: set track with axios data
+    setTrack(mockData.filter((element) => element.title === item.fileName)[0]);
   };
 
   useEffect(() => {
@@ -86,7 +97,7 @@ export default function MainPage() {
               md={12}
               lg={8}
               style={{
-                height: "600px",
+                height: "500px",
                 overflow: "auto",
               }}
             >
@@ -112,20 +123,27 @@ export default function MainPage() {
               md={12}
               lg={8}
               style={{
-                height: "600px",
+                height: "500px",
                 overflow: "auto",
               }}
             >
               <RecordItem data={dataItem} />
             </Col>
-            <Col className="pl-20" xs={24} sm={24} md={24} lg={8}>
-              <ReactApexChart
+            <Col
+              className="pl-20"
+              xs={24}
+              sm={24}
+              md={24}
+              lg={8}
+              style={{ height: "500px", overflow: "auto" }}
+            >
+              {/* <ReactApexChart
                 options={chartOptions}
                 series={chartOptions.series}
                 type="pie"
-                height={350}
-              />
-              <div
+                height={150}
+              /> */}
+              {/* <div
                 className={
                   dataItem.positive
                     ? "pl-4 mt-14 text-4xl text-positive-color"
@@ -137,11 +155,16 @@ export default function MainPage() {
                   : dataItem.positive < dataItem.negative
                   ? "This call is negative!"
                   : ""}
-              </div>
+              </div> */}
+              <AudioPlayer track={track} />
+              <LineChart />
             </Col>
           </Row>
+
+          {/* <Accordion data={dataItem} /> */}
         </Content>
-        <TimeLine data={dataItem} />
+        <Accordion data={dataItem} />
+        {/* <TimeLine data={dataItem} /> */}
       </Layout>
     </Layout>
   );

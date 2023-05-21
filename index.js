@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
-
+const add = require("./controller");
 const app = express();
 
 app.use(cors());
@@ -53,6 +53,30 @@ app.get("/api/data", (req, res) => {
           }
         });
       });
+    }
+  });
+});
+
+app.post("api/audiodata", (req, res) => {
+  const filename = req.body.filename; // assuming that the filename is in the request body
+  fs.readdir("./audiofiles", (err, files) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error retrieving data");
+    } else {
+      const file = files.find((file) => file === filename);
+      if (file) {
+        fs.readFile(`./audiofiles/${file}`, (err, data) => {
+          if (err) {
+            console.log(err);
+            res.status(500).send("Error retrieving data");
+          } else {
+            res.send(data);
+          }
+        });
+      } else {
+        res.status(404).send("File not found");
+      }
     }
   });
 });
