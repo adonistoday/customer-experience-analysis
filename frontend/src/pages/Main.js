@@ -170,7 +170,7 @@ export default function MainPage() {
 
           {/* <Accordion data={dataItem} /> */}
         </Content>
-        {<Accordion data={dataItem} />}
+        {dataItem!=[]&&<Accordion data={dataItem} />}
         {/* <TimeLine data={dataItem} /> */}
       </Layout>
     </Layout>

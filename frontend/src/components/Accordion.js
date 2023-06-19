@@ -41,9 +41,8 @@ export default function Example({ data = [] }) {
       }))
     : "";
   const cnt1=newTime?newTime.length:0;
-  console.log("cnt",cnt1);
+  console.log("cnt1",cnt1);
   for (let i = 0; i <cnt1; i++) {
-    
     totalTime = totalTime + newTime[i].time;
   }
   const differenceTime = (startTimestamp, endTimestamp) => {
@@ -75,7 +74,8 @@ export default function Example({ data = [] }) {
   };
   let talkwords1 = 0;
   let talkwords2 = 0;
-  const cnt2=data?data.transcription.length:0;
+  const cnt2=data.transcription?data.transcription.length:0;
+  console.log("cnt2", cnt2);
   for (let i = 0; i < cnt2; i++) {
     if (i % 2 == 0) {
       time1 =
