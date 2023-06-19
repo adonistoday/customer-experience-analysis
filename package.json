@@ -10,6 +10,7 @@
   "author": "SuperJUNO",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/language": "^5.3.0",
     "@material-tailwind/react": "^2.0.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",

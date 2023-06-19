@@ -26,6 +26,7 @@ export default function MainPage() {
   const [dataItem, setDataItem] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [audiofile, setAudiofile] = useState(null);
+  const [chartdata,setchartdata]=useState([]);
 
   const [track, setTrack] = useState(mockData[0]);
 
@@ -47,18 +48,25 @@ export default function MainPage() {
     setAudiofile(item.fileName);
     // TODO: set track with axios data
     setTrack(mockData.filter((element) => element.title === item.fileName)[0]);
+    console.log(item);
+    setchartdata(item.transcription);
   };
 
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/data")
-      .then((res) => setData(res.data))
+      .then((res) => 
+      {
+       
+        setData(res.data)
+      })
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <Layout className="h-screen">
       <Sider className="bg-gradient-to-br from-my-from-color to-my-to-color">
+
         <div className="logo" />
         <Menu
           theme="dark"
@@ -157,7 +165,7 @@ export default function MainPage() {
                   : ""}
               </div> */}
               <AudioPlayer track={track} />
-              <LineChart />
+              <LineChart chartdata={chartdata}/>
             </Col>
           </Row>
 
