@@ -12,7 +12,7 @@ import {
 // initTE({ Collapse });
 
 export default function Example({ data = [] }) {
-  // console.log("Accordion",data);
+  console.log("Accordion",data);
   const [collapse, setCollapse] = useState(0);
   let totalTime = 0;
   let time1 = 0;
@@ -40,8 +40,10 @@ export default function Example({ data = [] }) {
         time: item.endTime - item.startTime,
       }))
     : "";
-
-  for (let i = 0; i < newTime?newTime.length:0; i++) {
+  const cnt1=newTime?newTime.length:0;
+  console.log("cnt",cnt1);
+  for (let i = 0; i <cnt1; i++) {
+    
     totalTime = totalTime + newTime[i].time;
   }
   const differenceTime = (startTimestamp, endTimestamp) => {
@@ -73,7 +75,8 @@ export default function Example({ data = [] }) {
   };
   let talkwords1 = 0;
   let talkwords2 = 0;
-  for (let i = 0; i < data?data.transcription.length:0; i++) {
+  const cnt2=data?data.transcription.length:0;
+  for (let i = 0; i < cnt2; i++) {
     if (i % 2 == 0) {
       time1 =
         time1 +

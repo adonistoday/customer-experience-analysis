@@ -57,7 +57,6 @@ export default function MainPage() {
       .get("http://localhost:8080/api/data")
       .then((res) => 
       {
-       
         setData(res.data)
       })
       .catch((err) => console.log(err));
@@ -171,7 +170,7 @@ export default function MainPage() {
 
           {/* <Accordion data={dataItem} /> */}
         </Content>
-        {dataItem!=[]&&<Accordion data={dataItem} />}
+        {<Accordion data={dataItem} />}
         {/* <TimeLine data={dataItem} /> */}
       </Layout>
     </Layout>
