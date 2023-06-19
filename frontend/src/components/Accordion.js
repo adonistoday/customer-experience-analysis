@@ -41,9 +41,9 @@ export default function Example({ data = [] }) {
       }))
     : "";
 
-  // for (let i = 0; i < newTime.length; i++) {
-  //   totalTime = totalTime + newTime[i].time;
-  // }
+  for (let i = 0; i < newTime?newTime.length:0; i++) {
+    totalTime = totalTime + newTime[i].time;
+  }
   const differenceTime = (startTimestamp, endTimestamp) => {
     // Convert start timestamp to seconds
     const startParts = startTimestamp.split(":");
@@ -62,30 +62,30 @@ export default function Example({ data = [] }) {
     return timeDifference;
     // console.log("Time difference in seconds:", timeDifference);
   };
-  // const numWords = (text) => {
-  //   // Split the text into words using space as the delimiter
-  //   const words = text.split(" ");
+  const numWords = (text) => {
+    // Split the text into words using space as the delimiter
+    const words = text.split(" ");
 
-  //   // Get the number of words
-  //   const wordCount = words.length;
-  //   return wordCount;
-  //   // console.log("Number of words:", wordCount);
-  // };
+    // Get the number of words
+    const wordCount = words.length;
+    return wordCount;
+    // console.log("Number of words:", wordCount);
+  };
   let talkwords1 = 0;
   let talkwords2 = 0;
-  // for (let i = 0; i < data.transcription.length; i++) {
-  //   if (i % 2 == 0) {
-  //     time1 =
-  //       time1 +
-  //       differenceTime(data.transcription[i].START, data.transcription[i].END);
-  //     talkwords1 = talkwords1 + numWords(data.transcription[i].TEXT);
-  //   } else {
-  //     time2 =
-  //       time2 +
-  //       differenceTime(data.transcription[i].START, data.transcription[i].END);
-  //     talkwords2 = talkwords2 + numWords(data.transcription[i].TEXT);
-  //   }
-  // }
+  for (let i = 0; i < data?data.transcription.length:0; i++) {
+    if (i % 2 == 0) {
+      time1 =
+        time1 +
+        differenceTime(data.transcription[i].START, data.transcription[i].END);
+      talkwords1 = talkwords1 + numWords(data.transcription[i].TEXT);
+    } else {
+      time2 =
+        time2 +
+        differenceTime(data.transcription[i].START, data.transcription[i].END);
+      talkwords2 = talkwords2 + numWords(data.transcription[i].TEXT);
+    }
+  }
   const talkspeed = (talkTimeSeconds, talkWords) => {
     // Convert talk time from seconds to minutes
     const talkTimeMinutes = talkTimeSeconds / 60;
